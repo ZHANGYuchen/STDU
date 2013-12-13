@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="toBookingWSDL" targetNamespace="http://j2ee.netbeans.org/wsdl/BpelModuleBC/src/newWSDL" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://j2ee.netbeans.org/xsd/tableSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://j2ee.netbeans.org/wsdl/BpelModuleBC/src/newWSDL" xmlns:plink="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/">
+  <types>
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/">
+            <xsd:import namespace="http://j2ee.netbeans.org/xsd/tableSchema" schemaLocation="TO_User_Detailled_Bookings.xsd"/>
+	</xsd:schema>
+  </types>
+  <message name="RetMsg">
+    <part name="part" type="xsd:int"/>
+  </message>
+  <message name="outputMsg">
+    <part name="part" element="ns:TO_User_Detailled_Bookings"/>
+  </message>
+  <message name="inputMsg">
+    <part name="part" element="ns:TO_User_Detailled_Bookings"/>
+  </message>
+  <portType name="jdbcPortType">
+    <operation name="insert">
+      <input name="inputInsert" message="tns:inputMsg"/>
+      <output name="outputInsert" message="tns:RetMsg"/>
+    </operation>
+    <operation name="update">
+      <input name="inputUpdate" message="tns:inputMsg"/>
+      <output name="outputUpdate" message="tns:RetMsg"/>
+    </operation>
+    <operation name="delete">
+      <input name="inputDelete" message="tns:inputMsg"/>
+      <output name="outputDelete" message="tns:RetMsg"/>
+    </operation>
+    <operation name="find">
+      <input name="inputFind" message="tns:inputMsg"/>
+      <output name="outputFind" message="tns:outputMsg"/>
+    </operation>
+  </portType>
+  <binding name="binding" type="tns:jdbcPortType">
+    <jdbc:binding xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/"/>
+    <operation name="insert">
+    <jdbc:operation xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/"/>
+      <input name="inputInsert">
+    <jdbc:input xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/" MarkColumnName="" MarkColumnValue="" MoveRowToTableName="" PKName="id" PollMilliSeconds="5000" PollingPostProcessing="MoveRow" TableName="TO_User_Detailled_Bookings" Transaction="NOTransaction" numberOfRecords="" operationType="insert" paramOrder="id,user,booking_state,booking_creation_date,booked_persons_number,booking_creation_time,honored,booking_date,booking_type,present_persons_number,booking_time" sql="insert into TO_User_Detailled_Bookings (id,user,booking_state,booking_creation_date,booked_persons_number,booking_creation_time,honored,booking_date,booking_type,present_persons_number,booking_time) values (?,?,?,?,?,?,?,?,?,?,?)"/>
+      </input>
+      <output name="outputInsert">
+    <jdbc:output xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/" returnPartName="part"/>
+      </output>
+    </operation>
+    <operation name="update">
+    <jdbc:operation xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/"/>
+      <input name="inputUpdate">
+    <jdbc:input xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/" MarkColumnName="" MarkColumnValue="" MoveRowToTableName="" PKName="id" PollMilliSeconds="5000" PollingPostProcessing="MoveRow" TableName="TO_User_Detailled_Bookings" Transaction="NOTransaction" numberOfRecords="" operationType="update" paramOrder="id,user,booking_state,booking_creation_date,booked_persons_number,booking_creation_time,honored,booking_date,booking_type,present_persons_number,booking_time" sql="update TO_User_Detailled_Bookings set id  = ?,user  = ?,booking_state  = ?,booking_creation_date  = ?,booked_persons_number  = ?,booking_creation_time  = ?,honored  = ?,booking_date  = ?,booking_type  = ?,present_persons_number  = ?,booking_time  = ?"/>
+      </input>
+      <output name="outputUpdate">
+    <jdbc:output xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/" returnPartName="part"/>
+      </output>
+    </operation>
+    <operation name="delete">
+    <jdbc:operation xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/"/>
+      <input name="inputDelete">
+    <jdbc:input xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/" MarkColumnName="" MarkColumnValue="" MoveRowToTableName="" PKName="id" PollMilliSeconds="5000" PollingPostProcessing="MoveRow" TableName="TO_User_Detailled_Bookings" Transaction="NOTransaction" numberOfRecords="" operationType="delete" paramOrder="" sql="delete from TO_User_Detailled_Bookings"/>
+      </input>
+      <output name="outputDelete">
+    <jdbc:output xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/" returnPartName="part"/>
+      </output>
+    </operation>
+    <operation name="find">
+    <jdbc:operation xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/"/>
+      <input name="inputFind">
+    <jdbc:input xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/" MarkColumnName="" MarkColumnValue="" MoveRowToTableName="" PKName="id" PollMilliSeconds="5000" PollingPostProcessing="MoveRow" TableName="TO_User_Detailled_Bookings" Transaction="NOTransaction" numberOfRecords="" operationType="find" paramOrder="" sql="select id,user,booking_state,booking_creation_date,booked_persons_number,booking_creation_time,honored,booking_date,booking_type,present_persons_number,booking_time from TO_User_Detailled_Bookings"/>
+      </input>
+      <output name="outputFind">
+    <jdbc:output xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/" returnPartName="part"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="service">
+    <port name="port" binding="tns:binding">
+    <jdbc:address xmlns:jdbc="http://schemas.sun.com/jbi/wsdl-extensions/jdbc/" jndiName="jdbc/__defaultDS"/>
+    </port>
+  </service>
+    <plink:partnerLinkType xmlns:plink="http://docs.oasis-open.org/wsbpel/2.0/plnktype" name="jdbcpartner">
+        <plink:role name="jdbcPortTypeRole" portType="tns:jdbcPortType"/>
+    </plink:partnerLinkType>
+</definitions>
